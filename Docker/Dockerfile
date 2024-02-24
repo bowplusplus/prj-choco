@@ -1,5 +1,5 @@
 # ビルド専用ステージ
-FROM rust:1.53 as builder
+FROM rust:1.56 as builder
 WORKDIR /usr/src/prj-choco
 COPY . .
 RUN cargo build --release

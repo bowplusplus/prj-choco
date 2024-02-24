@@ -9,7 +9,7 @@ impl User {
     }
 
     fn display(&self) {
-        println!("Name: {}", "Email: {}", self.name, self.email);
+        println!("Name: {}, Email: {}", self.name, self.email);
     }
 }
 
