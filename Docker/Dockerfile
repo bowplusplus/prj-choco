@@ -2,7 +2,7 @@
 FROM rust:1.56 as builder
 WORKDIR /usr/src/prj-choco
 COPY . .
-RUN cargo build --release
+RUN cargo test && cargo build --release
 
 # 実行専用ステージ
 FROM debian:buster-slim

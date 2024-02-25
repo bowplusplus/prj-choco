@@ -1,5 +1,6 @@
 # prj-choco  
 これはRust言語、テスト、CIの練習用リポジトリです。
+ChatGPTとGithub Copilotとやりとりしながら作成しています。
 
 # 実行手順
 ```
