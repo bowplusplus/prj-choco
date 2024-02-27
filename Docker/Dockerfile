@@ -1,5 +1,19 @@
+FROM rust:1.76 as development
+WORKDIR /usr/src/prj-choco
+RUN apt update && apt install -y \
+    build-essential \
+    cmake \
+    git \
+    libssl-dev \
+    pkg-config \
+    vim \
+    wget \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
+CMD ["bash"]
+
 # ビルド専用ステージ
-FROM rust:1.56 as builder
+FROM rust:1.76 as builder
 WORKDIR /usr/src/prj-choco
 COPY . .
 RUN cargo test && cargo build --release
