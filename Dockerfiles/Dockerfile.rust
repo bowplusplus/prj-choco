@@ -1,0 +1,10 @@
+FROM rust:1.76
+WORKDIR /app
+RUN apt update && apt install -y \
+    vim \
+    wget \
+    curl \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
+
+CMD ["tail", "-f", "/dev/null"]
