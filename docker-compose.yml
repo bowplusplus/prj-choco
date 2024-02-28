@@ -1,11 +1,23 @@
 version: '3.7'
 services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
   rust-web-app:
     container_name: rust-web-app
     build:
-      context: ./Dockerfiles
-      dockerfile: Dockerfile.rust
+      context: .
+      dockerfile: Dockerfiles/Dockerfile.dev
     ports:
-      - 8080:8080
+      - "8080:8080"
     volumes:
-      - ./app:/app
+      - ./app:/usr/src/myapp
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URI: "mongodb://root:example@mongodb:27017/"

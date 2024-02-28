@@ -1,0 +1,15 @@
+# 使用するRustのベースイメージ
+FROM rust:1.76 as builder
+WORKDIR /usr/src/myapp
+# 依存関係のコピーとビルド
+COPY ./app/app/Cargo.toml ./app/app/Cargo.lock ./
+COPY ./app/app/src ./src
+RUN cargo build --release
+
+# 実行環境の準備
+FROM rust:1.76
+RUN apt update && apt install -y ca-certificates \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=builder /usr/src/myapp/target/release/myapp /usr/local/bin/myapp
+CMD ["myapp"]
